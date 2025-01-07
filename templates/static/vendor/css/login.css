@@ -8,7 +8,7 @@
 }
 
 body {
-    background-color: #363138;
+    background-color: #0d1117;
 }
 
 .login-box { 
@@ -35,7 +35,7 @@ body {
 
         .username-content {
             padding: 10px;
-            background-color: #3C373E;
+            background-color: #1c2431;
             display: flex;
             align-items: center;
             margin-bottom: 35px;
@@ -44,7 +44,7 @@ body {
 
         .password-content {
             padding: 10px;
-            background-color: #3C373E;
+            background-color: #1c2431;
             display: flex;
             align-items: center;
             border-radius: 25px;
@@ -60,7 +60,7 @@ body {
             width: 100%;
             line-height: 30px;
             background-color: transparent;
-            border: 1px solid #3C373E;
+            border: 1px solid #1c2431;
             margin-left: 10px;
         }
 
@@ -79,14 +79,14 @@ body {
             font-size: 18px;
             background-color: transparent;
             color: #fff;
-            border: 3px solid #3C373E;
+            border: 3px solid #1c2431;
             border-radius: 25px;
             transition: .5s;
         }
 
         button:hover {
             cursor: pointer;
-            background-color: #3C373E;
+            background-color: #1c2431;
             transition: .5s;
         }
     }

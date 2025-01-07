@@ -23,8 +23,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #2a2a2a;
-    color: white;
+    background-color: #1c2431;
+    color: #f0f6fc;
     width: 500px;
     border-radius: 25px;
     padding: 15px;
@@ -35,7 +35,7 @@
     text-align: center;
     padding-bottom: 15px;
     margin-bottom: 15px;
-    border-bottom: .1px solid grey;
+    border-bottom: .1px solid #0d1117;
 }
 
 .contents-info p {
@@ -43,12 +43,22 @@
     text-align: center;
 }
 
+.btn-outline-secondary {
+    color: #f0f6fc;
+    border-color: #0d1117;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #0d1117;
+    border-color: #0d1117;
+}
+
 .container {
     width: 100vw;
 }
 
 .card {
-    background-color: #3c373e;
+    background-color: #1c2431;
     border: none;
     border-radius: 15px
 }
@@ -59,15 +69,15 @@
 }
 
 .card-title {
-    color: #fff;
+    color: #f0f6fc;
 }
 
 .text-muted { 
-    color: #fff !important;
+    color: #f0f6fc !important;
 }
 
 table th {
-    color: #fff;
+    color: #f0f6fc;
     border: none;
 }
 
@@ -88,20 +98,20 @@ table tr, td {
 }
 
 .table tr:hover>td{
-    color: #fff;
+    color: #f0f6fc;
     transition: .5s all ease;;
 }
 
 .form-control {
-    background-color: #3c373e;
-    background: #3c373e;
-    color: #ffc107;
-    border-color: #ffc107;
+    background-color: #1c2431;
+    background: #1c2431;
+    color: #E40414;
+    border-color: #E40414;
     outline: none !important;
 }
 
 .form-control::placeholder {
-    color: #ffc107;
+    color: #E40414;
     outline: none !important;
 }
 
@@ -110,68 +120,69 @@ table tr, td {
 }
 
 .form-control:focus {
-    background-color: #3c373e;
-    color: #ffc107;
+    background-color: #1c2431;
+    color: #E40414;
     outline: none !important;
     box-shadow: none;
 }
 
 #btn-cadastrar {
-    color: #ffc107;
-    border-color: #ffc107;
+    color: #E40414;
+    border-color: #E40414;
 }
 
 #btn-cadastrar:hover {
-    background-color: #ffc107;
-    color: #fff;
+    background-color: #E40414;
+    color: #f0f6fc;
 }
 
 #btn-pesquisar {
-    background-color: #ffc107;
-    border-color: #ffc107;
+    background-color: #E40414;
+    border-color: #E40414;
 }
 
 #btn-pesquisar:hover {
-    background-color: #dfaf1e;
+    background-color: #9e0711;
     box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);;
 }
 
 .page-link {
-    background-color: #3c373e;
-    border-color: #ffc107;
-    color: #ffc107;
+    background-color: #1c2431;
+    border-color: #E40414;
+    color: #E40414;
 }
 
 .page-item.active .page-link {
-    background-color: #ffc107;
-    border-color: #ffc107;
+    background-color: #E40414;
+    border-color: #E40414;
 }
 
 .page-link:hover {
-    background-color: #ffc107;
-    color: #fff;
-    border-color: #ffc107;
+    background-color: #E40414;
+    color: #f0f6fc;
+    border-color: #E40414;
 }
 
 .input-group-text.valor {
-    background-color: #3c373e;
-    color: #ffc107;
-    border-color: #ffc107;
+    background-color: #1c2431;
+    color: #E40414;
+    border-color: #E40414;
 }
 
 .input-group-text {
-    background-color: #ffc107;
-    border-color: #ffc107;
+    background-color: #E40414;
+    border-color: #E40414;
+    color: #1c2431;
 }
 
 .form-control::-webkit-file-upload-button {
-    background-color: #ffc107;
-    border-color: #ffc107;
-    color: #fff;
+    background-color: #E40414;
+    border-color: #E40414;
+    color: #f0f6fc;
 }
 
 .card-header {
-    background-color: #3c373e;
+    background-color: #1c2431;
     border: none;
 }
 
@@ -189,7 +200,7 @@ table tr, td {
   ::-webkit-scrollbar-thumb {
     border-radius: 2px;
   
-    background-color: #ffc107
+    background-color: #E40414
   }
 
 #span-valor {
@@ -198,6 +209,14 @@ table tr, td {
 
 .pagination {
     flex-wrap: wrap !important;
+}
+
+.btn-danger {
+    background-color: #E40414;
+}
+
+.btn-danger:hover {
+    background-color: #9e0711;
 }
 
 @media screen and (max-width: 1000px) {
