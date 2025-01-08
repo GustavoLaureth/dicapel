@@ -112,7 +112,7 @@ main {
                 justify-content: space-between;
                 align-items: center;
                 flex-grow: 0.2;
-                background-color: #3C373E;
+                background-color: #1c2431;
                 padding: 20px;
                 border-radius: 15px;
 
@@ -128,11 +128,11 @@ main {
                         font-weight: 100;
                         font-size: 24px;
                         margin-bottom: 0px;
-                        color: #fff;
+                        color: #f0f6fc;
                     }
 
                     p {
-                        color: #777;
+                        color: #f0f6fc;
                         font-size: 14px;
                         letter-spacing: .5px;
                         margin-bottom: 0px;
