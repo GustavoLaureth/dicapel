@@ -119,46 +119,4 @@ def dashboard(request):
 
     soma = locale.currency(soma, grouping=True, symbol=None)
 
-    # valor entregue
-
-    entregue = Cliente.objects.all().filter(categoria=3).values_list('valor', flat=True)
-
-    entregue = list(entregue)
-    
-    c = [i.replace('.', '') for i in entregue]
-
-    cc = [i.replace(',', '.') for i in c]
-
-    d = [float(i) for i in cc]
-
-    soma_2 = 0
-
-    for val in d:
-        soma_2 += val
-
-    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
-
-    soma_2 = locale.currency(soma_2, grouping=True, symbol=None)
-
-    # valor pago
-
-    pago = Cliente.objects.all().filter(categoria=4).values_list('valor', flat=True)
-
-    pago = list(pago)
-
-    g = [i.replace('.', '') for i in pago]
-
-    gg = [i.replace(',', '.') for i in g]
-
-    f = [float(i) for i in gg]
-
-    soma_3 = 0
-
-    for val in f:
-        soma_3 += val
-
-    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
-
-    soma_3 = locale.currency(soma_3, grouping=True, symbol=None)
-
-    return render(request, 'cliente/dashboard.html', {'nempenhos': number_empenhos, 'valor': soma, 'entregue': soma_2, 'pago': soma_3})
+    return render(request, 'cliente/dashboard.html', {'nempenhos': number_empenhos, 'valor': soma})

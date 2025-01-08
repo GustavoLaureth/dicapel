@@ -14,7 +14,7 @@
                 
                   <div class="input-group col-12 p-15 my-2">
                     <div class="input-group col-3 p-0">
-                      {% render_field form.numero name="numero" type="name" placeholder="Nº Empenho" autocomplete="off"%}
+                      {% render_field form.numero name="numero" type="name" placeholder="Nº Pedido" autocomplete="off"%}
                     </div>
                     <div class="input-group col-9 pr-0">
                       {% render_field form.nome name="nome" id="nome" type="name" placeholder="Nome do cliente" autocomplete="off"%}
@@ -25,28 +25,16 @@
                       {% render_field form.cnpj type="text" onblur="checkCnpj(this.value)" id="cpfcnpj" placeholder="CNPJ" autocomplete="off"%}
                     </div>
                     <div class="input-group col-4 pr-0">
-                      {% render_field form.categoria name="categoria" id="categoria" placeholder="Categoria" autocomplete="off"%}
-                    </div>
-                    <div class="input-group col-4 pr-0">
                       {% render_field form.empresa name="empresa" id="empresa" placeholder="Empresa" autocomplete="off"%}
                     </div>
                   </div>
                   <div class="input-group col-12 p-0">
-                    <div class="input-group col-6 p-15 mb-2" >
-                      {% render_field form.empenho name="empenho" type="file" placeholder="Empenho" autocomplete="off"%}
-                    </div>
                     <div class="input-group col-5 p-15 mb-2" >
                       <span class="input-group-text valor" id="span-valor">R$</span>
-                      {% render_field form.valor name="valor" type="text" id="valor" placeholder="Valor do empenho" autocomplete="off"%}
+                      {% render_field form.valor name="valor" type="text" id="valor" placeholder="Valor do Pedido" autocomplete="off"%}
                     </div>
                   </div>
                   <div class="input-group col-12 p-0">
-                    <div class="input-group col-6 p-15 mb-2" >
-                      {% render_field form.n_nfe name="n_nfe" type="name" placeholder="Nº Nota" autocomplete="off"%}
-                    </div>
-                    <div class="input-group col-5 p-15 mb-2" >
-                      {% render_field form.nfe name="nfe" type="file" value="0" placeholder="Nfe" autocomplete="off"%}
-                    </div>
                   </div>
                   <div class="input-group col-8 p-15 mb-2" >
                     {% render_field form.descricao rows="3" style="resize:none;" placeholder="Observações..." type="text" autocomplete="off"%}
@@ -58,6 +46,7 @@
                   </div>
 
                   {% render_field form.data_criacao name="data_criacao" class="d-none" %}
+                  {% render_field form.data_criacao name="comprovante_entrega" class="d-none" %}
 
                 <div class="row">
                     <div class="col-2 mb-2 ml-3">

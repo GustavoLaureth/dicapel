@@ -11,10 +11,10 @@
             <a class="btn btn-outline-primary mb-3" id="btn-cadastrar" href="{% url 'form' %}">Cadastrar Empenho</a>
             <div class="row">
                 <div class="col">
-                    <h6 class="card-subtitle mb-2 text-muted">Pesquisar por Empenhos:</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Pesquisar por Pedidos:</h6>
                     <form method="get" class="form-inline filtros">
                         <div class="form-group mb-3 mr-2">
-                            {% render_field myFilter.form.numero placeholder="Nº Empenho" class="form-control nempenho" id="id_numero" autocomplete="off" %}
+                            {% render_field myFilter.form.numero placeholder="Nº Pedido" class="form-control nempenho" id="id_numero" autocomplete="off" %}
                         </div>
                         <div class="form-group mb-3 mr-2">
                             {% render_field myFilter.form.nome placeholder="Cliente" class="form-control" id="id_nome" autocomplete="off" %}
@@ -24,12 +24,6 @@
                         </div>
                         <div class="form-group mb-3 mr-2">
                             {% render_field myFilter.form.valor placeholder="Valor do Empenho" class="form-control" id="valor" autocomplete="off" %}
-                        </div>
-                        <div class="form-group mb-3 mr-2">
-                            {% render_field myFilter.form.n_nfe class="form-control" placeholder="Nº Nota" id="nfe" autocomplete="off" %}
-                        </div>
-                        <div class="form-group mb-3 mr-2">
-                            {% render_field myFilter.form.categoria class="form-control statusempenho" id="id_categoria" autocomplete="off" %}
                         </div>
                         <button class="btn btn-primary ml-2 mb-3" id="btn-pesquisar" type="submit">Pesquisar</button>
                     </form>
@@ -50,11 +44,9 @@
                     <tr>
                         <th scope="col" class="text-center num">Numero</th>
                         <th scope="col" class="text-center">Nome</th>
-                        <!-- <th scope="col" class="text-center cnpjtable">CNPJ</th> -->
                         <th scope="col" class="text-center">Valor</th>
                         <th scope="col" class="text-center empresatable">Empresa</th>
                         <th scope="col" class="text-center">Ações</th>
-                        <th scope="col" class="text-center statustable">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,25 +55,16 @@
                     <tr>
                         <td class="text-center num">{{ cliente.numero }}</td>
                         <td class="text-center">{{ cliente.nome }}</td>
-                        <!-- <td class="text-center cnpjtable">{{ cliente.cnpj }}</td> -->
                         <td class="text-center">R$ {{ cliente.valor }}</td>
                         <td class="text-center empresatable">{{ cliente.empresa }}</td>
                         <td class="text-center">
                             <a href="/cliente/detalhe/{{ cliente.id }}" class="btn btn-outline-secondary"><i class="bi bi-eye"></i></a>
                             <a href="/cliente/edit/{{ cliente.id }}/" class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></a>
-                            <a href="{{ cliente.empenho.url }}" class="btn btn-outline-warning" target="_blank"><i class="bi bi-file-earmark-arrow-down"></i></a>
-                            {% if cliente.nfe != '0' and cliente.nfe != ''%}
-                            <a href="{{ cliente.nfe.url }}" class="btn btn-outline-success" target="_blank"><i class="bi bi-receipt"></i></a>
+                            {% if cliente.comprovante_entrega != '0' and cliente.comprovante_entrega != ''%}
+                            <a href="{{ cliente.comprovante_entrega.url }}" class="btn btn-outline-success" target="_blank"><i class="bi bi-receipt"></i></a>
                             {% else %}
                             {% endif %}
                         </td>
-                        {% if cliente.categoria_id == 2 %}
-                        <td class="text-center statustable" style="background-color: red; color: white;">{{ cliente.categoria }}</td>
-                        {% elif cliente.categoria_id == 3 %}
-                        <td class="text-center statustable" style="background-color: green; color: white;">{{ cliente.categoria }}</td>
-                        {% else %}
-                        <td class="text-center statustable">{{ cliente.categoria }}</td>
-                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>
