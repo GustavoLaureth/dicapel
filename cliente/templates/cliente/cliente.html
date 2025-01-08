@@ -7,8 +7,8 @@
 <div class="content">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Empenhos</h5>
-            <a class="btn btn-outline-primary mb-3" id="btn-cadastrar" href="{% url 'form' %}">Cadastrar Empenho</a>
+            <h5 class="card-title">Pedidos</h5>
+            <a class="btn btn-outline-primary mb-3" id="btn-cadastrar" href="{% url 'form' %}">Cadastrar Pedido</a>
             <div class="row">
                 <div class="col">
                     <h6 class="card-subtitle mb-2 text-muted">Pesquisar por Pedidos:</h6>
@@ -23,7 +23,7 @@
                             {% render_field myFilter.form.cnpj placeholder="CNPJ" class="form-control cnpjempenho" id="id_cnpj" autocomplete="off" %}
                         </div>
                         <div class="form-group mb-3 mr-2">
-                            {% render_field myFilter.form.valor placeholder="Valor do Empenho" class="form-control" id="valor" autocomplete="off" %}
+                            {% render_field myFilter.form.valor placeholder="Valor do Pedido" class="form-control" id="valor" autocomplete="off" %}
                         </div>
                         <button class="btn btn-primary ml-2 mb-3" id="btn-pesquisar" type="submit">Pesquisar</button>
                     </form>
@@ -61,8 +61,17 @@
                             <a href="/cliente/detalhe/{{ cliente.id }}" class="btn btn-outline-secondary"><i class="bi bi-eye"></i></a>
                             <a href="/cliente/edit/{{ cliente.id }}/" class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></a>
                             {% if cliente.comprovante_entrega != '0' and cliente.comprovante_entrega != ''%}
-                            <a href="{{ cliente.comprovante_entrega.url }}" class="btn btn-outline-success" target="_blank"><i class="bi bi-receipt"></i></a>
+                            <a href="{{ cliente.comprovante_entrega.url }}" class="btn btn-outline-success" target="_blank"><i class="fa-solid fa-truck"></i></a>
                             {% else %}
+                            <a class="btn btn-outline-warning" target="_blank">
+                                <form action="{%  url 'update' cliente.id %}" method="POST" enctype="multipart/form-data" class="upload-form" style="height: 24px; color: #ffc107;">
+                                    {% csrf_token %}
+                                    <label for="upload-{{ cliente.id }}" class="upload-icon">
+                                        <i class="bi bi-upload"></i> <!-- Ícone de upload do Bootstrap Icons -->
+                                    </label>
+                                    <input type="file" accept="image/*" capture="user" id="upload-{{ cliente.id }}" name="comprovante_entrega" data-id="{{ cliente.id }}" onchange="this.form.submit()" class="d-none">
+                                </form>
+                            </a>
                             {% endif %}
                         </td>
                     </tr>

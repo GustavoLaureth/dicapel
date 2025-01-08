@@ -67,7 +67,7 @@ def create(request):
         form = ClienteForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.SUCCESS, 'Empenho cadastrado com sucesso.')
+            messages.add_message(request, messages.SUCCESS, 'Pedido cadastrado com sucesso.')
             return redirect('cliente')
     else:
         form = ClienteForm()
@@ -81,17 +81,30 @@ def edit(request, pk):
 @login_required(login_url='login')
 def update(request, pk):
     cliente = Cliente.objects.get(pk=pk)
-    form = ClienteForm(request.POST, request.FILES, instance=cliente)
-    if form.is_valid():
-        form.save()
-        messages.add_message(request, messages.INFO, 'Empenho atualizado com sucesso.')
-        return redirect('cliente')
+    
+    if request.method == 'POST':
+        if 'comprovante_entrega' in request.FILES:  # Verifica se o arquivo foi enviado
+            cliente.comprovante_entrega = request.FILES['comprovante_entrega']
+            cliente.save()
+            messages.add_message(request, messages.SUCCESS, 'Comprovante enviado com sucesso.')
+            return redirect('cliente')  # Redireciona para a página de listagem
+        
+        # Caso o formulário seja submetido por outro motivo
+        form = ClienteForm(request.POST, request.FILES, instance=cliente)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.INFO, 'Pedido atualizado com sucesso.')
+            return redirect('cliente')
+    
+    # Requisição GET ou outros fluxos que não retornam nada
+    form = ClienteForm(instance=cliente)
+    return render(request, 'cliente/form.html', {'cliente': cliente, 'form': form})
 
 @login_required(login_url='login')
 def delete(request, pk):
     cliente = Cliente.objects.get(pk=pk)
     cliente.delete()
-    messages.add_message(request, messages.ERROR, 'Empenho excluido com sucesso.')
+    messages.add_message(request, messages.ERROR, 'Pedido excluido com sucesso.')
     return redirect('cliente')
 
 @login_required(login_url='login')

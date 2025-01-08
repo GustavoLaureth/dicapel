@@ -54,7 +54,7 @@
 }
 
 .container {
-    width: 100vw;
+    width: 100dvw;
 }
 
 .card {
@@ -252,13 +252,13 @@ table tr, td {
         display: none;
     }
 
-    #btn-cadastrar {
+    /* #btn-cadastrar {
         display: none;
     }
 
     .card-title {
         display: none;
-    }
+    } */
 
     .side-section {
         display: none;
