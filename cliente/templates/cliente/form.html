@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load widget_tweaks %}
 
 {% block conteudo %}
+
+    <div class="img-top mt-5" style="width: 200px;">
+      <img src="{% static 'img/Dicapel_logo_VERMELHA.png'%}" alt="logo" style="width: 200px;">
+    </div>
+
     <div class="container center mt-5">
         <div class="card card-primary card-formulario">
             <div class="card-header">
@@ -13,25 +19,25 @@
                 {% csrf_token %}
                 
                   <div class="input-group col-12 p-15 my-2">
-                    <div class="input-group col-4 p-0">
-                      {% render_field form.numero name="numero" type="name" placeholder="Nº Pedido" autocomplete="off"%}
+                    <div class="input-group col-12 p-0 mb-2">
+                      {% render_field form.numero name="numero" type="name" placeholder="Nº NF" autocomplete="off"%}
                     </div>
-                    <div class="input-group col-8 pr-0">
+                    <div class="input-group col-12 p-0">
                       {% render_field form.nome name="nome" id="nome" type="name" placeholder="Nome do cliente" autocomplete="off"%}
                     </div>
                   </div>
                   <div class="input-group col-12 mb-2 p-15">
-                    <div class="input-group col-6 p-0" >
+                    <div class="input-group col-12 p-0 mb-2" >
                       {% render_field form.cnpj type="text" onblur="checkCnpj(this.value)" id="cpfcnpj" placeholder="CNPJ" autocomplete="off"%}
                     </div>
-                    <div class="input-group col-6 pr-0">
+                    <div class="input-group col-12 p-0">
                       {% render_field form.empresa name="empresa" id="empresa" placeholder="Empresa" autocomplete="off"%}
                     </div>
                   </div>
                   <div class="input-group col-12 p-0">
                     <div class="input-group col-12 p-15 mb-2" >
                       <span class="input-group-text valor" id="span-valor">R$</span>
-                      {% render_field form.valor name="valor" type="text" id="valor" placeholder="Valor do Pedido" autocomplete="off"%}
+                      {% render_field form.valor name="valor" type="text" id="valor" placeholder="Valor da NF" autocomplete="off"%}
                     </div>
                   </div>
                   <div class="input-group col-12 p-0">
@@ -56,11 +62,11 @@
               
                   {% render_field form.data_criacao name="data_criacao" class="d-none" %}
 
-                <div class="row" style="justify-content: center;">
+                <div class="row">
                     <div class="col-5 mb-2 ml-3">
                       <a class="btn btn-danger btn-block" href="{{ request.META.HTTP_REFERER }}">Cancelar</a>
                     </div>
-                    <div class="col-5 m-0">
+                    <div class="col-6 m-0">
                       <button type="submit" class="btn btn-success btn-block" id="submit_button" >Cadastrar</button>
                     </div>
                 </div>

@@ -184,6 +184,7 @@ table tr, td {
 .card-header {
     background-color: #1c2431;
     border: none;
+    border-radius: 15px !important;
 }
 
 .card-title {
