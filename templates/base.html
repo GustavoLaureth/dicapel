@@ -18,9 +18,9 @@
             <p>Páginas</p>
         </div>
         <div class="buttons">
-            <button onclick="location.href='{% url 'dashboard' %}'" class="active"><i class="fa-solid fa-chart-column"></i><p>Visão Geral</p></button>
-            <button onclick="location.href='{% url 'form' %}'"><i class="fa-regular fa-square-plus"></i></i><p>Cadastrar Empenho</p></button>
-            <button onclick="location.href='{% url 'cliente' %}'"><i class="fa-solid fa-users"></i><p>Clientes</p></button>
+            <button onclick="location.href='{% url 'dashboard' %}'" class="{% if request.path == '/cliente/dashboard/' %}active{% endif %}"><i class="fa-solid fa-chart-column"></i><p>Visão Geral</p></button>
+            <button onclick="location.href='{% url 'form' %}'" class="{% if request.path == '/cliente/form/' %}active{% endif %}"><i class="fa-regular fa-square-plus"></i></i><p>Cadastrar NF</p></button>
+            <button onclick="location.href='{% url 'cliente' %}'" class="{% if request.path == '/' %}active{% endif %}"><i class="fa-solid fa-users"></i><p>Notas Fiscais</p></button>
         </div>
     </div>
     <div class="footer">

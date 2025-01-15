@@ -4,45 +4,47 @@
 
 {% block conteudo %}
 
-    <div class="img-top mt-5" style="width: 200px;">
+    <div class="img-top mt-4" style="width: 200px;">
       <img src="{% static 'img/Dicapel_logo_VERMELHA.png'%}" alt="logo" style="width: 200px;">
     </div>
 
-    <div class="container center mt-5">
+    <div class="container center mt-4">
         <div class="card card-primary card-formulario">
             <div class="card-header">
                 <h5 class="card-title mb-0">
-                    Cadastrar Pedido
+                    Cadastrar NF
                 </h5>
             </div>            
             <form action="{% if cliente %}/cliente/update/{{cliente.id}}/{% else %}/cliente/create/{% endif %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 
                   <div class="input-group col-12 p-15 my-2">
-                    <div class="input-group col-12 p-0 mb-2">
+                    <div class="input-group col-3 p-0 mb-0" id="input-form-1">
                       {% render_field form.numero name="numero" type="name" placeholder="Nº NF" autocomplete="off"%}
                     </div>
-                    <div class="input-group col-12 p-0">
+                    <div class="input-group col-9 pr-0"  id="input-form-2">
                       {% render_field form.nome name="nome" id="nome" type="name" placeholder="Nome do cliente" autocomplete="off"%}
                     </div>
                   </div>
                   <div class="input-group col-12 mb-2 p-15">
-                    <div class="input-group col-12 p-0 mb-2" >
+                    <div class="input-group col-6 p-0 mb-0" id="input-form-1">
                       {% render_field form.cnpj type="text" onblur="checkCnpj(this.value)" id="cpfcnpj" placeholder="CNPJ" autocomplete="off"%}
                     </div>
-                    <div class="input-group col-12 p-0">
+                    <div class="input-group col-6 pr-0" id="input-form-2">
                       {% render_field form.empresa name="empresa" id="empresa" placeholder="Empresa" autocomplete="off"%}
                     </div>
                   </div>
-                  <div class="input-group col-12 p-0">
-                    <div class="input-group col-12 p-15 mb-2" >
+                  <div class="input-group col-12 p-15">
+                    <div class="input-group col-6 p-0 mb-2" id="input-form-1">
                       <span class="input-group-text valor" id="span-valor">R$</span>
                       {% render_field form.valor name="valor" type="text" id="valor" placeholder="Valor da NF" autocomplete="off"%}
                     </div>
+                    <div class="input-group col-6 pr-0" id="input-form-1">
+                      <input type="file" name="comprovante_entrega" class="form-control col-12" accept="image/*" capture="environment">
+                    </div>
+                    
                   </div>
-                  <div class="input-group col-12 p-0">
-                  </div>
-                  <div class="input-group col-12 p-15 mb-2" >
+                  <div class="input-group col-12 p-15 mb-2">
                     {% render_field form.descricao rows="3" style="resize:none;" placeholder="Observações..." type="text" autocomplete="off"%}
                     <div class="input-group-append">
                       <div class="input-group-text">
@@ -50,23 +52,14 @@
                       </div>
                     </div>
                   </div>
-                  
-                  {% if cliente.comprovante_entrega %}
-                    <div class="input-group col-12 p-15 mb-2 d-flex justify-content-between">
-                      <input type="text" name="comprovante_entrega_nome" value="{{ cliente.comprovante_entrega }}" placeholder="{{ cliente.comprovante_entrega }}" class="form-control col-4" disabled style="background-color: transparent;">
-                      <input type="file" name="comprovante_entrega" class="form-control col-7">
-                    </div>
-                  {% else %}
-                      {% render_field form.comprovante_entrega name="comprovante_entrega" class="d-none" %}
-                  {% endif %}
               
                   {% render_field form.data_criacao name="data_criacao" class="d-none" %}
 
-                <div class="row">
-                    <div class="col-5 mb-2 ml-3">
+                <div class="input-group col-12 mb-2 p-15">
+                    <div class="input-group col-2 p-0" id="button-input-form">
                       <a class="btn btn-danger btn-block" href="{{ request.META.HTTP_REFERER }}">Cancelar</a>
                     </div>
-                    <div class="col-6 m-0">
+                    <div class="input-group col-2 pr-0" id="button-input-form">
                       <button type="submit" class="btn btn-success btn-block" id="submit_button" >Cadastrar</button>
                     </div>
                 </div>
