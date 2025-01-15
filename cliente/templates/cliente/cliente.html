@@ -20,7 +20,7 @@
                             {% render_field myFilter.form.nome placeholder="Cliente" class="form-control" id="id_nome" autocomplete="off" %}
                         </div>
                         <div class="form-group mb-3 mr-2" id="input-form-1">
-                            {% render_field myFilter.form.cnpj placeholder="CNPJ" class="form-control cnpjempenho" id="id_cnpj" autocomplete="off" %}
+                            {% render_field myFilter.form.cnpj placeholder="CNPJ / CPF" class="form-control cnpjempenho" id="id_cnpj" autocomplete="off" %}
                         </div>
                         <div class="form-group mb-3 mr-2" id="input-form-1">
                             {% render_field myFilter.form.valor placeholder="Valor da NF" class="form-control" id="valor" autocomplete="off" %}
@@ -117,7 +117,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"crossorigin="anonymous"></script>
 
 <script>
-$('#id_cnpj').mask('00.000.000/0000-00');
+var options = {
+    onKeyPress: function (cpf, ev, el, op) {
+        var masks = ['000.000.000-000', '00.000.000/0000-00'];
+        $('#id_cnpj').mask((cpf.length > 14) ? masks[1] : masks[0], op);
+    }
+}
+
+$(document).ready(function () {
+            $('#id_numero').mask('000.000.000', {reverse: true});
+        });
+
+$('#id_cnpj').length > 11 ? $('#id_cnpj').mask('00.000.000/0000-00', options) : $('#id_cnpj').mask('000.000.000-00#', options);
 
 $('#valor').mask('000.000.000.000.000,00', {reverse: true});
 </script>

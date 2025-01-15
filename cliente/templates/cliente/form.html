@@ -20,7 +20,7 @@
                 
                   <div class="input-group col-12 p-15 my-2">
                     <div class="input-group col-3 p-0 mb-0" id="input-form-1">
-                      {% render_field form.numero name="numero" type="name" placeholder="Nº NF" autocomplete="off"%}
+                      {% render_field form.numero name="numero" type="name" placeholder="Nº NF" id="number_nf" autocomplete="off"%}
                     </div>
                     <div class="input-group col-9 pr-0"  id="input-form-2">
                       {% render_field form.nome name="nome" id="nome" type="name" placeholder="Nome do cliente" autocomplete="off"%}
@@ -28,7 +28,7 @@
                   </div>
                   <div class="input-group col-12 mb-2 p-15">
                     <div class="input-group col-6 p-0 mb-0" id="input-form-1">
-                      {% render_field form.cnpj type="text" onblur="checkCnpj(this.value)" id="cpfcnpj" placeholder="CNPJ" autocomplete="off"%}
+                      {% render_field form.cnpj type="text" onblur="checkCnpj(this.value)" id="cpfcnpj" placeholder="CNPJ / CPF" autocomplete="off"%}
                     </div>
                     <div class="input-group col-6 pr-0" id="input-form-2">
                       {% render_field form.empresa name="empresa" id="empresa" placeholder="Empresa" autocomplete="off"%}
@@ -73,7 +73,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
 
 <script>
-$('#cpfcnpj').mask('00.000.000/0000-00');
+// $('#cpfcnpj').mask('00.000.000/0000-00');
+
+var options = {
+    onKeyPress: function (cpf, ev, el, op) {
+        var masks = ['000.000.000-000', '00.000.000/0000-00'];
+        $('#cpfcnpj').mask((cpf.length > 14) ? masks[1] : masks[0], op);
+    }
+}
+
+$('#cpfcnpj').length > 11 ? $('#cpfcnpj').mask('00.000.000/0000-00', options) : $('#cpfcnpj').mask('000.000.000-00#', options);
+
+$(document).ready(function () {
+            $('#number_nf').mask('000.000.000', {reverse: true});
+        });
 
 $('#valor').mask('000.000.000.000.000,00', {reverse: true});
 
