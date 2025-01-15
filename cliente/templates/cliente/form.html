@@ -97,7 +97,7 @@ function checkCnpj(cnpj) {
         'dataType': 'jsonp',
         'success': function(dado){
             if(dado.nome == undefined){
-                alert(dado.status + '' + dado.message)
+                // alert(dado.status + '' + dado.message)
             } else {
                 document.getElementById('nome').value = dado.nome
             }
