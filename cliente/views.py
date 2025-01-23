@@ -11,6 +11,9 @@ from .filters import ClienteFilter
 from django.db.models import Sum
 import locale
 
+import base64
+from django.core.files.base import ContentFile
+
 def login_view(request):
     context = {}
 
@@ -64,6 +67,17 @@ def form(request):
 @login_required(login_url='login')
 def create(request):
     if request.method == 'POST':
+        webimg = request.POST.get('webimg')  # Obtém o valor Base64 do input hidden
+        if webimg:
+            # Decodifica o Base64 em um arquivo
+            format, imgstr = webimg.split(';base64,')
+            ext = format.split('/')[-1]
+            img_data = ContentFile(base64.b64decode(imgstr), name=f"uploaded_image.{ext}")
+
+            # Atualiza o request.FILES para incluir a imagem decodificada
+            request.FILES['comprovante_entrega'] = img_data  # 'image' deve ser o nome do campo no seu modelo/formulário
+
+        # Processa o formulário normalmente
         form = ClienteForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
@@ -81,21 +95,28 @@ def edit(request, pk):
 @login_required(login_url='login')
 def update(request, pk):
     cliente = Cliente.objects.get(pk=pk)
-    
+
     if request.method == 'POST':
-        if 'comprovante_entrega' in request.FILES:  # Verifica se o arquivo foi enviado
-            cliente.comprovante_entrega = request.FILES['comprovante_entrega']
+        webimg = request.POST.get('webimg')  # Captura o valor Base64 do input hidden (se existir)
+        if webimg:
+            # Decodifica o Base64 e cria um arquivo
+            format, imgstr = webimg.split(';base64,')
+            ext = format.split('/')[-1]
+            img_data = ContentFile(base64.b64decode(imgstr), name=f"updated_image.{ext}")
+            
+            # Atualiza o campo de imagem do cliente
+            cliente.comprovante_entrega = img_data
             cliente.save()
-            messages.add_message(request, messages.SUCCESS, 'Comprovante enviado com sucesso.')
-            return redirect('cliente')  # Redireciona para a página de listagem
-        
-        # Caso o formulário seja submetido por outro motivo
+            messages.add_message(request, messages.SUCCESS, 'Imagem atualizada com sucesso.')
+            return redirect('cliente')
+
+        # Processa o restante do formulário
         form = ClienteForm(request.POST, request.FILES, instance=cliente)
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.INFO, 'Pedido atualizado com sucesso.')
             return redirect('cliente')
-    
+
     # Requisição GET ou outros fluxos que não retornam nada
     form = ClienteForm(instance=cliente)
     return render(request, 'cliente/form.html', {'cliente': cliente, 'form': form})

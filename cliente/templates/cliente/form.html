@@ -40,11 +40,45 @@
                       {% render_field form.valor name="valor" type="text" id="valor" placeholder="Valor da NF" autocomplete="off"%}
                     </div>
                     <div class="input-group col-6 pr-0" id="input-form-1">
-                      <input type="file" name="comprovante_entrega" class="form-control col-12" accept="image/*" capture="environment">
-                    </div>
-                    
+
+                      <input type="file" name="comprovante_entrega" class="form-control col-12 comprovante-input" accept="image/*" capture="environment">
+
+                      <button type="button" class="form-control btn-comprovante" data-toggle="modal" data-target="#exampleModalCenter" id="comprovante">
+                        Anexar Comprovante
+                      </button>
+
+                      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">Comprovante de Entrega</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div id="camera" class="camera">
+                                <video id="video">Imagem não disponível.</video>
+                                <button id="startbutton" type="button">Tirar Foto</button>
+                                <canvas id="canvas" style="display: none;"></canvas>
+                                <input id="webimg" name="webimg" type="hidden">
+                              </div>
+                              <br>
+                              <div>
+                                <img id="photo" alt="Carregando Foto">
+                              </div>
+                              <br>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Salvar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                     
                   </div>
-                  <div class="input-group col-12 p-15 mb-2">
+                  
+                  <div class="input-group col-12 p-0 mb-2">
                     {% render_field form.descricao rows="3" style="resize:none;" placeholder="Observações..." type="text" autocomplete="off"%}
                     <div class="input-group-append">
                       <div class="input-group-text">
@@ -55,7 +89,7 @@
               
                   {% render_field form.data_criacao name="data_criacao" class="d-none" %}
 
-                <div class="input-group col-12 mb-2 p-15">
+                <div class="input-group col-12 mb-2 p-0">
                     <div class="input-group col-2 p-0" id="button-input-form">
                       <a class="btn btn-danger btn-block" href="{{ request.META.HTTP_REFERER }}">Cancelar</a>
                     </div>
@@ -105,6 +139,94 @@ function checkCnpj(cnpj) {
     })
 }
 
+
+// CAMERA
+
+const video = document.getElementById('video');
+  const canvas = document.getElementById('canvas');
+  const photo = document.getElementById('photo');
+  const startButton = document.getElementById('startbutton');
+  const webimgInput = document.getElementById('webimg');
+
+  // Access webcam
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then((stream) => {
+      video.srcObject = stream;
+      video.play();
+    })
+    .catch((err) => {
+      console.error('Error accessing the webcam:', err);
+    });
+
+  // Capture photo
+  startButton.addEventListener('click', () => {
+    const context = canvas.getContext('2d');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    // Convert canvas to Base64
+    const dataURL = canvas.toDataURL('image/png');
+
+    // Update the hidden input with the Base64 image
+    webimgInput.value = dataURL;
+
+    // Preview the image
+    photo.src = dataURL;
+  });
+
 </script>
+
+<style>
+#video {
+  border: 1px solid black;
+  box-shadow: 2px 2px 3px black;
+  width:320px;
+  height:240px;
+}
+
+#photo {
+  border: 1px solid black;
+  box-shadow: 2px 2px 3px black;
+  width:320px;
+  height:240px;
+}
+
+#canvas {
+  display:none;
+}
+
+.camera {
+  width: 340px;
+  display:inline-block;
+}
+
+.output {
+  width: 340px;
+  display:inline-block;
+}
+
+#startbutton {
+  display:block;
+  position:relative;
+  margin-left:auto;
+  margin-right:auto;
+  bottom:32px;
+  background-color: rgba(0, 150, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  font-family: "Lucida Grande", "Arial", sans-serif;
+  color: rgba(255, 255, 255, 1.0);
+}
+
+.contentarea {
+  font-size: 16px;
+  font-family: "Lucida Grande", "Arial", sans-serif;
+  width: 760px;
+}
+
+</style>
 
 {% endblock %}

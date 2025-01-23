@@ -69,7 +69,7 @@
                                     <label for="upload-{{ cliente.id }}" class="upload-icon">
                                         <i class="bi bi-upload"></i> <!-- Ícone de upload do Bootstrap Icons -->
                                     </label>
-                                    <input type="file" accept="image/*" capture="user" id="upload-{{ cliente.id }}" name="comprovante_entrega" data-id="{{ cliente.id }}" onchange="this.form.submit()" class="d-none">
+                                    <input type="file" accept="image/*" capture="environment" id="upload-{{ cliente.id }}" name="comprovante_entrega" data-id="{{ cliente.id }}" onchange="this.form.submit()" class="d-none">
                                 </form>
                             </a>
                             {% endif %}

@@ -216,6 +216,20 @@ table tr, td {
     background-color: #9e0711;
 }
 
+.comprovante-input {
+    display: none;
+}
+
+btn-comprovante:hover {
+    cursor: pointer;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 @media screen and (max-width: 1000px) {
     .navbar-toggler {
         display: none;
@@ -297,5 +311,13 @@ table tr, td {
     .contents {
         width: 100%;
         margin-top: 3rem;
+    }
+
+    #comprovante {
+        display: none;
+    }
+
+    .comprovante-input {
+        display: block;
     }
 }
