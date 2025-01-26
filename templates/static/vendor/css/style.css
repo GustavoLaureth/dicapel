@@ -230,6 +230,52 @@ btn-comprovante:hover {
     align-items: center;
 }
 
+.modal-content {
+    border-radius: 15px;
+    background-color: #1c2431;
+}
+
+.modal-header {
+    border-bottom: 2px solid #0d1117;
+}
+
+.modal-footer {
+    border-top: none;
+}
+
+.modal-title {
+    color: #fff;
+}
+
+.camera {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+#startbutton {
+    margin-top: 15px;
+    position: static !important;
+    border-radius: 15px !important;
+    font-weight: bold;
+    background-color: #0d1117;
+    border: none;
+    padding: 8px;
+}
+
+.close {
+    color: #fff;
+}
+
+.close span {
+    color: #fff
+}
+
+#video {
+    border: none !important;
+    border-radius: 15px;
+}
+
 @media screen and (max-width: 1000px) {
     .navbar-toggler {
         display: none;
